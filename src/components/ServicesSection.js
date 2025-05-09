@@ -7,14 +7,9 @@ const ServicesSection = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const el = entry.target;
-
           if (entry.isIntersecting) {
-            el.classList.remove('reveal-out');
-            el.classList.add('reveal-in');
-          } else {
-            el.classList.remove('reveal-in');
-            el.classList.add('reveal-out');
+            entry.target.classList.add('reveal-in');
+            observer.unobserve(entry.target); // Evita volver a animar
           }
         });
       },
@@ -66,7 +61,7 @@ const ServicesSection = () => {
   return (
     <section id="services" className="py-20 bg-gray-50">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16 enhance-header">
+        <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-[#0B1F3A] mb-4">Nuestros Servicios</h2>
           <div className="w-20 h-1 bg-[#1FB8D2] mx-auto"></div>
         </div>
